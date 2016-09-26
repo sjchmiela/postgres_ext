@@ -201,9 +201,9 @@ module ActiveRecord
       self
     end
 
-    def build_arel
-      arel = super
-      
+    def build_arel_with_extensions
+      arel = build_arel_without_extensions
+
       build_with(arel)
 
       build_rank(arel, rank_value) if rank_value
