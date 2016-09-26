@@ -266,7 +266,19 @@ module ActiveRecord
         end
       end
     end
+          
+    prepend(PrependedMethods)
+      
+    module PrependedMethods
+      def build_arel
+        arel = super
 
-    alias_method_chain :build_arel, :extensions
+        build_with(arel)
+
+        build_rank(arel, rank_value) if rank_value
+
+        arel
+      end
+    end
   end
 end
