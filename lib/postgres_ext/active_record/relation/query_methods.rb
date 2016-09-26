@@ -266,8 +266,7 @@ module ActiveRecord
         end
       end
     end
-  end
-  module QueryMethods
-    prepend QueryMethods
+
+    alias_method_chain :build_arel, :extensions
   end
 end
