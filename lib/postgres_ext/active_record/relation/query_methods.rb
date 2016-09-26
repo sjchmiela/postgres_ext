@@ -134,7 +134,7 @@ module ActiveRecord
 
     # WithChain objects act as placeholder for queries in which #with does not have any parameter.
     # In this case, #with must be chained with #recursive to return a new relation.
-    module PrependedMethods
+    class WithChainDummyClass
       def initialize(scope)
         @scope = scope
       end
@@ -201,9 +201,7 @@ module ActiveRecord
       self
     end
 
-    def build_arel
-      arel = super
-
+    def build_arel(arel)
       build_with(arel)
 
       build_rank(arel, rank_value) if rank_value
@@ -264,6 +262,13 @@ module ActiveRecord
 
           arel.project(over_node)
         end
+      end
+    end
+    
+    module PrependedMethods
+      def build_arel
+        arel = super
+        WithChainDummyClass.new.build_arel(arel)
       end
     end
           
