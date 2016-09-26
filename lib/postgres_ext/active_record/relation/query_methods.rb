@@ -265,8 +265,8 @@ module ActiveRecord
           arel.project(over_node)
         end
       end
-      
-      prepend(PrependedMethods)
+    end
+    prepend(PrependedMethods)
       
       module PrependedMethods
         def build_arel
@@ -279,6 +279,5 @@ module ActiveRecord
           arel
         end
       end
-    end
   end
 end
