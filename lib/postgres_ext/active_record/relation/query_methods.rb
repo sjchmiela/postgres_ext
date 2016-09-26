@@ -265,19 +265,19 @@ module ActiveRecord
           arel.project(over_node)
         end
       end
-    end
-          
-    prepend(PrependedMethods)
       
-    module PrependedMethods
-      def build_arel
-        arel = super
+      prepend(PrependedMethods)
+      
+      module PrependedMethods
+        def build_arel
+          arel = super
 
-        build_with(arel)
+          build_with(arel)
 
-        build_rank(arel, rank_value) if rank_value
+          build_rank(arel, rank_value) if rank_value
 
-        arel
+          arel
+        end
       end
     end
   end
