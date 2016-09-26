@@ -1,5 +1,5 @@
 module ActiveRecord
-  module QueryMethodsPrependWith
+  module QueryMethods
     class WhereChain
       def overlap(opts, *rest)
         substitute_comparisons(opts, rest, Arel::Nodes::Overlap, 'overlap')
@@ -268,6 +268,6 @@ module ActiveRecord
     end
   end
   module QueryMethods
-    prepend QueryMethodsPrependWith
+    prepend QueryMethods
   end
 end
